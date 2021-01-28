@@ -24,5 +24,24 @@ namespace ApiRestHalloween.Controllers
             return data.GetPaises();
         }
 
+        public int PostPais([FromBody] Pais pais)
+        {
+            // Llamar a la Capa de Acceso a Datos
+            return data.InsertarPais(pais);
+        }
+
+        public int PutPais(string id, [FromBody] Pais pais)
+        {
+            pais.IdPais = id;
+            // Llamar a la Capa de Acceso a Datos
+            return data.UpdatePais(pais);
+        }
+        public int DeleteCategory(string id)
+        {
+            Pais pais = new Pais();
+            pais.IdPais = id;
+            // Llamar a la Capa de Acceso a Datos
+            return data.DeletePais(pais);
+        }
     }
 }

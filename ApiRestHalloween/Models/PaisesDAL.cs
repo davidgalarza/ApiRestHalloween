@@ -50,5 +50,79 @@ namespace ApiRestHalloween.Models
             }
             return lista;
         }
+
+        internal int DeletePais(Pais pais)
+        {
+            int afectadas;
+            string sql = "DELETE FROM Pais " +
+            "WHERE IdPais = @IdPais";
+            using (SqlConnection connection = new
+            SqlConnection(GetConnectionString()))
+            {
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@CategoryID",
+                    pais.IdPais);
+                    connection.Open();
+
+                    afectadas = command.ExecuteNonQuery();
+                    connection.Close();
+
+                }
+            }
+            return afectadas;
+        }
+
+        internal int UpdatePais(Pais pais)
+        {
+            int afectadas;
+            string sql = "UPDATE Pais " +
+            "SET ShortName = @Nombre" +
+            "WHERE IdPais = @IdPais";
+            using (SqlConnection connection = new
+            SqlConnection(GetConnectionString()))
+            {
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@IdPais",
+                   pais.IdPais);
+                    command.Parameters.AddWithValue("@Nombre", pais.Nombre);
+
+                    connection.Open();
+
+                    afectadas = command.ExecuteNonQuery();
+                    connection.Close();
+
+                }
+            }
+            return afectadas;
+        }
+
+        internal int InsertarPais(Pais pais)
+        {
+            int afectadas;
+            string sql = "INSERT INTO Pais" +
+            "(IdPais, Nombre) " +
+            "VALUES (@IdPais, @Nombre)";
+
+            using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+            {
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@IdPais",
+                    pais.IdPais);
+                    command.Parameters.AddWithValue("@Nombre", pais.Nombre);
+
+                    connection.Open();
+                    afectadas = command.ExecuteNonQuery();
+
+                    connection.Close();
+
+                }
+            }
+            return afectadas;
+        }
+
+
     }
 }
