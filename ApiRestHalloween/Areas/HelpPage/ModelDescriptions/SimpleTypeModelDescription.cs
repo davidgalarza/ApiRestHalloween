@@ -1,0 +1,6 @@
+namespace ApiRestHalloween.Areas.HelpPage.ModelDescriptions
+{
+    public class SimpleTypeModelDescription : ModelDescription
+    {
+    }
+}
